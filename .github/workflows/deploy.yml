@@ -1,0 +1,54 @@
+name: Deploy GitHub Pages from src
+
+on:
+  push:
+    branches:
+      - main # This workflow runs when changes are pushed to your 'main' branch
+  workflow_dispatch: # This allows you to manually trigger the workflow from GitHub's Actions tab
+
+permissions:
+  contents: write # Grant the necessary permission for the workflow to push to a branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # The type of runner (virtual machine) to use
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Action to pull your code from the repo
+
+      - name: Prepare build directory for deployment
+        run: |
+          # Create a temporary directory to move original root files aside
+          mkdir _temp_root_content_
+          # Move all current root-level files/folders (except .git) into the temp dir
+          # The '|| true' ignores errors if certain files don't exist
+          shopt -s dotglob # Include dotfiles (like .nojekyll)
+          for item in *; do
+            if [[ "$item" != "_temp_root_content_" && "$item" != ".git" ]]; then
+              mv "$item" _temp_root_content_/ || true
+            fi
+          done
+          shopt -u dotglob # Disable dotglob
+
+          # Now, move everything from src to the root
+          mv _temp_root_content_/src/* . || true
+          mv _temp_root_content_/src/.* . 2>/dev/null || true # Handles hidden files within src
+
+          # Recreate .nojekyll in the root for the deployment if it was moved/deleted
+          touch .nojekyll
+
+          # Clean up the temporary directory and the original src directory
+          rm -rf _temp_root_content_
+          rmdir src 2>/dev/null || true # Remove src only if empty after moving contents
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # A popular action for deploying to GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub's automatically provided token
+          publish_dir: ./ # Publish the current directory (which now contains src content)
+          publish_branch: gh-pages # Deploy this content to the 'gh-pages' branch
+          user_name: 'github-actions[bot]' # Recommended user name for the commit
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          # If you use a custom domain, you might want to add:
+          # cname: yourdomain.com
