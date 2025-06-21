@@ -337,3 +337,88 @@ body {
     font-size: 3rem; /* Adjust this value as needed */
     margin-bottom: 1rem; /* Adds space below the name */
 }
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 2rem 0 1rem 0;
+  background: #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.slider-track {
+  display: flex;
+  width: calc(250px * 16); /* 16 slides, adjust if you add/remove */
+  animation: scrollSlider 30s linear infinite;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 0;
+}
+
+.slide img {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: grayscale(0.2);
+  transition: filter 0.2s, transform 0.2s;
+}
+.slide img:hover {
+  filter: grayscale(0) drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+  transform: scale(1.1);
+}
+
+@keyframes scrollSlider {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 2rem 0 1rem 0;
+  background: #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scrollSlider 30s linear infinite;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 0;
+}
+.slide img {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: grayscale(0.2);
+  transition: filter 0.2s, transform 0.2s;
+}
+.slide img:hover {
+  filter: grayscale(0) drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+  transform: scale(1.1);
+}
+@keyframes scrollSlider {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.what-can-hossam-do {
+  background: #f8f9fa;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.what-can-hossam-do h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #22223b;
+}
+.what-can-hossam-do ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+.what-can-hossam-do li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
