@@ -105,7 +105,7 @@ body {
 
 .navbar #logo img {
   display: block;
-  width: 40px;
+  width: 60px;
 }
 
 .navbar .btn {
@@ -379,6 +379,7 @@ body {
   border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
+
 .slider-track {
   display: flex;
   width: max-content;
@@ -387,6 +388,7 @@ body {
   gap: 2.5rem;
   padding: 1rem 0;
 }
+
 .slide img {
   height: 48px;
   width: auto;
@@ -398,6 +400,7 @@ body {
   filter: grayscale(0) drop-shadow(0 2px 8px rgba(0,0,0,0.1));
   transform: scale(1.1);
 }
+
 @keyframes scrollSlider {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -421,4 +424,14 @@ body {
 .what-can-hossam-do li {
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
+}
+[data-theme="dark"] .what-can-hossam-do {
+  background: #181818; /* or var(--card-background) if you want */
+  color: #fff;
+}
+[data-theme="dark"] .what-can-hossam-do ul,
+[data-theme="dark"] .what-can-hossam-do li,
+[data-theme="dark"] .what-can-hossam-do p,
+[data-theme="dark"] .what-can-hossam-do h2 {
+  color: #fff;
 }
